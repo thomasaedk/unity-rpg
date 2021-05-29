@@ -1,37 +1,54 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Combat;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Mover : MonoBehaviour
+namespace RPG.Movement
 {
-    void Update()
+    public class Mover : MonoBehaviour
     {
-        if (Input.GetMouseButton(0))
-        {
-            MoveToCursor();
-        }
-        UpdateAnimator();
-    }
+        private NavMeshAgent _navMeshAgent;
+        private Animator _animator;
+        private Fighter _fighter;
 
-    private void MoveToCursor()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        bool hasHit = Physics.Raycast(ray, out hit);
-        if (hasHit)
+        private void Start()
         {
-            NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
-            navMeshAgent.SetDestination(hit.point);
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _animator = GetComponent<Animator>();
+            _fighter = GetComponent<Fighter>();
         }
-    }
-    
-    private void UpdateAnimator()
-    {
-        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
-        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-        float speed = localVelocity.z;
 
-        GetComponent<Animator>().SetFloat("ForwardSpeed", speed);
+        void Update()
+        {
+            UpdateAnimator();
+        }
+
+        public void StartMoveAction(Vector3 destination)
+        {
+            _fighter.Cancel();
+            MoveTo(destination);
+        }
+        
+        public void MoveTo(Vector3 destination)
+        {
+            _navMeshAgent.SetDestination(destination);
+            _navMeshAgent.isStopped = false;
+        }
+
+        public void Stop()
+        {
+            _navMeshAgent.isStopped = true;
+        }
+        
+        private void UpdateAnimator()
+        {
+            Vector3 velocity = _navMeshAgent.velocity;
+            Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+            float speed = localVelocity.z;
+
+            _animator.SetFloat("ForwardSpeed", speed);
+        }
     }
 }
