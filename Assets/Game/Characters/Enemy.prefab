@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &8464588727569064970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7205219466138968214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebbc2178189146944a9bdd707078ace1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &267691983141609235
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -25,7 +13,19 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8464588727569064970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7205219466138968214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebbc2178189146944a9bdd707078ace1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2868858316495828969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40,6 +40,10 @@ PrefabInstance:
     - target: {fileID: 6833526857906176548, guid: 140ff4a67fe04284288e9351a6020e70, type: 3}
       propertyPath: health
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6833526857906176548, guid: 140ff4a67fe04284288e9351a6020e70, type: 3}
+      propertyPath: healthPoints
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7979847078232582611, guid: 140ff4a67fe04284288e9351a6020e70, type: 3}
       propertyPath: m_Enabled

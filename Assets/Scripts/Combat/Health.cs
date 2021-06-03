@@ -1,15 +1,35 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] private float health = 100f;
+        [SerializeField] private float healthPoints = 100f;
+        
+        private Animator _animator;
+        private bool isDead = false;
+
+        private void Start()
+        {
+            _animator = GetComponent<Animator>();
+        }
 
         public void TakeDamage(float damage)
         {
-            health = Mathf.Max(health - damage, 0f);
-            Debug.Log("Health: " + health);
+            healthPoints = Mathf.Max(healthPoints - damage, 0f);
+            if (healthPoints == 0)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            if (isDead) return;
+            isDead = true;
+            _animator.SetTrigger("die");
         }
     }
 }
