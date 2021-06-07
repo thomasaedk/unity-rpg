@@ -10,6 +10,7 @@ namespace RPG.Combat
         
         private Animator _animator;
         private bool isDead = false;
+        public bool IsDead => isDead;
 
         private void Start()
         {
