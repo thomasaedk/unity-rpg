@@ -2,19 +2,22 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace RPG.Combat
+namespace RPG.Core
 {
     public class Health : MonoBehaviour
     {
         [SerializeField] private float healthPoints = 100f;
         
         private Animator _animator;
+        private ActionScheduler _actionScheduler;
+        
         private bool isDead = false;
         public bool IsDead => isDead;
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
+            _actionScheduler = GetComponent<ActionScheduler>();
         }
 
         public void TakeDamage(float damage)
@@ -31,6 +34,7 @@ namespace RPG.Combat
             if (isDead) return;
             isDead = true;
             _animator.SetTrigger("die");
+            _actionScheduler.CancelCurrentAction();
         }
     }
 }

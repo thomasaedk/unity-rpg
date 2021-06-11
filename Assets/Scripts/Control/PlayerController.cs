@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using RPG.Combat;
+using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
 
@@ -11,16 +12,19 @@ namespace RPG.Control
         private Camera _camera;
         private Mover _mover;
         private Fighter _fighter;
+        private Health _health;
     
         void Start()
         {
             _camera = Camera.main;
             _mover = GetComponent<Mover>();
             _fighter = GetComponent<Fighter>();
+            _health = GetComponent<Health>();
         }
 
         void Update()
         {
+            if (_health.IsDead) return;
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
         }
@@ -31,11 +35,13 @@ namespace RPG.Control
             foreach (RaycastHit hit in hits)
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (!_fighter.CanAttack(target)) continue;
+                if (target == null) continue;
+
+                if (!_fighter.CanAttack(target.gameObject)) continue;
                 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    _fighter.Attack(target);
+                    _fighter.Attack(target.gameObject);
                 }
                 return true;
             }
