@@ -1,4 +1,4 @@
 # unity-rpg
-[Udemy RPG Developer course](https://www.udemy.com/course/unityrpg/)
+[Udemy RPG Developer course](https://udemy.com/course/unityrpg/)
 
 Made with Unity version 2020.3.9f1
